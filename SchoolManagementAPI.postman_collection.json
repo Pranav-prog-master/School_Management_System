@@ -1,0 +1,297 @@
+{
+  "info": {
+    "name": "School Management API",
+    "description": "Postman collection for School Management API.\n\n**Base URL:** `http://localhost:5000`\n\n## APIs\n1. **POST /addSchool** - Add a new school\n2. **GET /listSchools** - List schools sorted by proximity\n\n## Setup\n- Make sure the server is running: `npx nodemon`\n- Select the `School Management API` environment before testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Add School",
+      "item": [
+        {
+          "name": "Add School - Success",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Delhi Public School\",\n  \"address\": \"Mathura Road, New Delhi\",\n  \"latitude\": 28.6139,\n  \"longitude\": 77.2090\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/addSchool",
+              "host": ["{{baseUrl}}"],
+              "path": ["addSchool"]
+            },
+            "description": "Adds a new school to the database.\n\n**Request Body:**\n| Field | Type | Required | Description |\n|-------|------|----------|-------------|\n| name | string | ✅ | School name |\n| address | string | ✅ | School address |\n| latitude | float | ✅ | Geographic latitude |\n| longitude | float | ✅ | Geographic longitude |\n\n**Expected Response (200):**\n```json\n{\n  \"message\": \"School added successfully\"\n}\n```"
+          },
+          "response": [
+            {
+              "name": "200 - School Added Successfully",
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"School added successfully\"\n}",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Delhi Public School\",\n  \"address\": \"Mathura Road, New Delhi\",\n  \"latitude\": 28.6139,\n  \"longitude\": 77.2090\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/addSchool",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["addSchool"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Add School - Duplicate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Delhi Public School\",\n  \"address\": \"Mathura Road, New Delhi\",\n  \"latitude\": 28.6139,\n  \"longitude\": 77.2090\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/addSchool",
+              "host": ["{{baseUrl}}"],
+              "path": ["addSchool"]
+            },
+            "description": "Attempt to add a school that already exists.\n\n**Expected Response (400):**\n```json\n{\n  \"error\": \"School already exists\"\n}\n```"
+          },
+          "response": [
+            {
+              "name": "400 - School Already Exists",
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"School already exists\"\n}",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Delhi Public School\",\n  \"address\": \"Mathura Road, New Delhi\",\n  \"latitude\": 28.6139,\n  \"longitude\": 77.2090\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/addSchool",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["addSchool"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Add School - Missing Fields",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Incomplete School\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/addSchool",
+              "host": ["{{baseUrl}}"],
+              "path": ["addSchool"]
+            },
+            "description": "Attempt to add a school with missing required fields.\n\n**Expected Response (400):**\n```json\n{\n  \"error\": \"All fields are required\"\n}\n```"
+          },
+          "response": [
+            {
+              "name": "400 - Missing Fields",
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"All fields are required\"\n}",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Incomplete School\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/addSchool",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["addSchool"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List Schools",
+      "item": [
+        {
+          "name": "List Schools - Success",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/listSchools?latitude=28.6139&longitude=77.2090",
+              "host": ["{{baseUrl}}"],
+              "path": ["listSchools"],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "28.6139",
+                  "description": "Your current latitude"
+                },
+                {
+                  "key": "longitude",
+                  "value": "77.2090",
+                  "description": "Your current longitude"
+                }
+              ]
+            },
+            "description": "Returns all schools sorted by distance from the provided coordinates.\n\n**Query Parameters:**\n| Parameter | Type | Required | Description |\n|-----------|------|----------|-------------|\n| latitude | float | ✅ | User's current latitude |\n| longitude | float | ✅ | User's current longitude |\n\n**Expected Response (200):**\n```json\n{\n  \"message\": \"Schools retrieved successfully\",\n  \"schools\": [\n    {\n      \"id\": 1,\n      \"name\": \"Delhi Public School\",\n      \"address\": \"Mathura Road, New Delhi\",\n      \"latitude\": 28.6139,\n      \"longitude\": 77.209,\n      \"distance\": 0\n    }\n  ]\n}\n```"
+          },
+          "response": [
+            {
+              "name": "200 - Schools Retrieved Successfully",
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Schools retrieved successfully\",\n  \"schools\": [\n    {\n      \"id\": 1,\n      \"name\": \"Delhi Public School\",\n      \"address\": \"Mathura Road, New Delhi\",\n      \"latitude\": 28.6139,\n      \"longitude\": 77.209,\n      \"distance\": 0\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Ryan International School\",\n      \"address\": \"Sector 40, Gurgaon\",\n      \"latitude\": 28.4595,\n      \"longitude\": 77.0266,\n      \"distance\": 25.4\n    }\n  ]\n}",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/listSchools?latitude=28.6139&longitude=77.2090",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["listSchools"],
+                  "query": [
+                    {
+                      "key": "latitude",
+                      "value": "28.6139"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "77.2090"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "List Schools - Missing Params",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/listSchools",
+              "host": ["{{baseUrl}}"],
+              "path": ["listSchools"]
+            },
+            "description": "Attempt to list schools without providing coordinates.\n\n**Expected Response (400):**\n```json\n{\n  \"error\": \"Latitude and longitude are required\"\n}\n```"
+          },
+          "response": [
+            {
+              "name": "400 - Missing Coordinates",
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Latitude and longitude are required\"\n}",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/listSchools",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["listSchools"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
