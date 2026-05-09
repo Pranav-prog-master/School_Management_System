@@ -219,27 +219,6 @@ A ready-to-use Postman collection is included: `SchoolManagementAPI.postman_coll
 
 ---
 
-## Deployment
-
-### Deploy on Render (free)
-
-1. Push your code to GitHub
-2. Go to [render.com](https://render.com) → `New` → `Web Service`
-3. Connect your GitHub repository
-4. Set the following:
-   - **Build Command:** `npm install`
-   - **Start Command:** `node server.js`
-5. Add all `.env` variables under the `Environment` tab
-6. Click `Deploy`
-
-Live API will be available at:
-```
-https://educase-school-api.onrender.com/addSchool
-https://educase-school-api.onrender.com/listSchools
-```
-
----
-
 ## Notes
 
 - The `.env` file is excluded from version control via `.gitignore`
