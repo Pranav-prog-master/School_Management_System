@@ -10,6 +10,6 @@ app.use(express.json());
   const pool = await connectDB();
   app.use("/", schoolRoutes(pool));
 
-  const PORT = process.env.PORT || 5000;
+  const PORT = 5000;
   app.listen(PORT, () => console.log(`School Management API running on http://localhost:${PORT}`));
 })();
